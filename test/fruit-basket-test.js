@@ -74,7 +74,6 @@ describe("Create Fruit Basket", async function () {
 
         getFruitName.forEach(element => {
             fruitBasket.push(element.fruit_name)
-            // console.log(element.fruit_name)
         });
 
         assert.equal(allBaskets.length, fruitBasket.length)
@@ -84,7 +83,7 @@ describe("Create Fruit Basket", async function () {
 describe('Show Total Price', async function () {
     it("Should show the total price for given fruit basket", async function () {
 
-        var allInBasket = ['Banana', 'Apple', 'Orange'];
+        var bananaBasket = ["Banana"];
         var fruitBasket = [];
         await basket.createFruitBasket("Banana")
         var getFruitName = await basket.getFruit("")
@@ -92,12 +91,13 @@ describe('Show Total Price', async function () {
         getFruitName.forEach(element => {
             fruitBasket.push(element.price)
             console.log(element.price)
+            console.log(fruitBasket)
+            
         });
 
-        assert.equal(allInBasket.length, fruitBasket.length)
+        assert.equal(bananaBasket.lenght, fruitBasket.length)
 
-
-        assert.equal(['Banana', 'Apple', 'Orange'], await basket.showPrice());
+        assert.equal([fruitBasket], await basket.showPrice());
 
     })
 })

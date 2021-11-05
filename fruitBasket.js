@@ -1,13 +1,13 @@
 module.exports = function FruitBasket(pool) {
 
     async function createFruitBasket(fruit) {
-        console.log(fruit)
+        // console.log(fruit)
         var fruitName = await pool.query("SELECT * FROM fruit_basket WHERE fruit_name = $1", [fruit])
         if (fruitName.rows.length == 0) {
             await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ($1, $2, $3)`, [fruit, 1, 0])
         } else {
-            await pool.query(`UPDATE fruit_basket SET quantity = quantity + 1, price = price + price WHERE fruit_name = $1`, [fruit])
-            console.log(fruitName.rows)
+            await pool.query(`UPDATE fruit_basket SET quantity = quantity + 1, price = price + 1 WHERE fruit_name = $1`, [fruit])
+            // console.log(fruitName.rows)
         }
     }
     async function getFruit() {
@@ -25,9 +25,8 @@ module.exports = function FruitBasket(pool) {
        for (let i = 0; i < getPrice.rows.length; i++) {
            const origPrice = getPrice.rows[i]
            basketPrice.push(origPrice.price);
-           console.log(origPrice.price)
+        //    console.log(origPrice.price)
        }
-       console.log(basketPrice)
 
        return basketPrice;
     }

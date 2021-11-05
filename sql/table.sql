@@ -1,8 +1,8 @@
 drop table if exists fruit_basket;
 create table fruit_basket ( 
   id serial not null primary key,
-  fruit_name text, 
-  quantity int, 
+  fruit_name varchar(255) not null, 
+  quantity numeric not null, 
   price decimal(10,2)
   );
 
