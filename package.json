@@ -1,0 +1,26 @@
+{
+  "name": "fruitbasket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OwethuSotomela/fruitBasket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OwethuSotomela/fruitBasket/issues"
+  },
+  "homepage": "https://github.com/OwethuSotomela/fruitBasket#readme",
+  "dependencies": {
+    "pg": "^8.7.1"
+  }
+}
