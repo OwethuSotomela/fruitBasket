@@ -1,9 +1,11 @@
 language: node_js
 env:
-  - DATABASE_URL = 'postgresql://localhost:5432/travis_ci_test'
+  - DATABASE_URL = 'postgresql://codex:codex123localhost:5432/travis_ci_test'
 node_js:
   - 12
 before_script:
+  before_script:
+  # - psql -c "CREATE owe8 codex123 WITH PASSWORD 'codex123';" -U postgres
   - psql -c 'create database travis_ci_test;' -U postgres
   - psql -U postgres -d travis_ci_test -a -f sql/table.sql
 services:
