@@ -5,7 +5,6 @@ node_js:
   - 12
 before_script:
   before_script:
-  # - psql -c "CREATE owe8 codex123 WITH PASSWORD 'codex123';" -U postgres
   - psql -c 'create database travis_ci_test;' -U postgres
   - psql -U postgres -d travis_ci_test -a -f sql/table.sql
 services:
