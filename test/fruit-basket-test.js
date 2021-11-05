@@ -14,6 +14,17 @@ const pool = new Pool({
 const basket = tastyFruit(pool);
 
 describe("Create Fruit Basket", async function () {
+
+    // beforeEach(async function () {
+    //     await pool.query("delete from fruit_basket;");
+        
+    //     await pool.query("delete from fruit_basket;");
+    //     await pool.query("INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ($1, $2, $3)", ["Banana", 1, 3]);
+    //     await pool.query("INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ($1, $2, $3)", ["Apple", 1, 3.50]);
+    //     await pool.query("INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ($1, $2, $3)", ["Orange", 1], 3.50);
+        
+    // });
+
     it("Should insert Banana baskets to the database", async function () {
 
         var allBaskets = ["Banana", "Apple", "Orange"]
@@ -95,9 +106,9 @@ describe('Show Total Price', async function () {
             
         });
 
-        assert.equal(bananaBasket.lenght, fruitBasket.length)
+        assert.equal(bananaBasket.length, fruitBasket.length)
 
-        assert.equal([fruitBasket], await basket.showPrice());
+        assert.equal([fruitBasket.price], await basket.showPrice());
 
     })
 })

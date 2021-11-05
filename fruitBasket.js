@@ -1,13 +1,12 @@
 module.exports = function FruitBasket(pool) {
 
     async function createFruitBasket(fruit) {
-        // console.log(fruit)
         var fruitName = await pool.query("SELECT * FROM fruit_basket WHERE fruit_name = $1", [fruit])
         if (fruitName.rows.length == 0) {
             await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ($1, $2, $3)`, [fruit, 1, 0])
         } else {
             await pool.query(`UPDATE fruit_basket SET quantity = quantity + 1, price = price + 1 WHERE fruit_name = $1`, [fruit])
-            // console.log(fruitName.rows)
+            console.log(fruitName.rows)
         }
     }
     async function getFruit() {
@@ -31,10 +30,16 @@ module.exports = function FruitBasket(pool) {
        return basketPrice;
     }
 
+    async function sumOf(){
+        var fruitTypeSum = await pool.query("SELECT SUM(quantity) FROM fruit_basket")
+        return fruitTypeSum.rows;
+    }
+
     return {
         createFruitBasket,
         getFruit,
         emptyDB,
-        showPrice
+        showPrice,
+        sumOf
     }
 }
