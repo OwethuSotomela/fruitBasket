@@ -6,12 +6,22 @@ module.exports = function FruitBasket(pool) {
             await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price, original_price) VALUES ($1, $2, $3, $4)`, [fruit, qty, price, price/qty])
         } else {
             await pool.query(`UPDATE fruit_basket SET quantity = quantity + 1, price = price + original_price WHERE fruit_name = $1`, [fruit])
-            console.log(fruitName.rows)
+            // console.log(fruitName.rows)
         }
     }
 
     async function getFruit() {
         var fruitName = await pool.query("SELECT * FROM fruit_basket")
+        return fruitName.rows;
+    }
+
+    async function findFruit(fruit) {
+        var fruitName = await pool.query("SELECT fruit_name FROM fruit_basket where fruit_name=$1", [fruit])
+        return fruitName.rows;
+    }
+
+    async function getFruitSum(fruit) {
+        var fruitName = await pool.query("SELECT price FROM fruit_basket where fruit_name=$1", [fruit])
         return fruitName.rows;
     }
 
@@ -25,22 +35,16 @@ module.exports = function FruitBasket(pool) {
        for (let i = 0; i < getPrice.rows.length; i++) {
            const origPrice = getPrice.rows[i]
            basketPrice.push(origPrice.price);
-        //    console.log(origPrice.price)
        }
-
        return basketPrice;
-    }
-
-    async function sumOf(){
-        var fruitTypeSum = await pool.query("SELECT SUM(quantity) FROM fruit_basket")
-        return fruitTypeSum.rows;
     }
 
     return {
         createFruitBasket,
         getFruit,
+        findFruit,
         emptyDB,
         showPrice,
-        sumOf
+        getFruitSum,
     }
 }
