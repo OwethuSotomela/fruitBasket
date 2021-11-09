@@ -20,15 +20,15 @@ module.exports = function FruitBasket(pool) {
         return fruitName.rows;
     }
 
-    // async function getFruitSum(fruit) {
-    //     var fruitName = await pool.query("SELECT price FROM fruit_basket where fruit_name=$1", [fruit])
-    //     return fruitName.rows;
-    // }
-
     async function getFruitSum(fruit) {
-        var fruitName = await pool.query("SELECT SUM(price) FROM fruit_basket where fruit_name=$1", [fruit])
+        var fruitName = await pool.query("SELECT price FROM fruit_basket where fruit_name=$1", [fruit])
         return fruitName.rows;
     }
+
+    // async function getFruitSum(fruit) {
+    //     var fruitName = await pool.query("SELECT SUM(price) FROM fruit_basket where fruit_name=$1", [fruit])
+    //     return fruitName.rows;
+    // }
 
     async function emptyDB(){
         await pool.query("DELETE FROM fruit_basket");
