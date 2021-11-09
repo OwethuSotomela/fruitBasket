@@ -94,11 +94,13 @@ describe('Show Total Price', async function () {
 describe('Show sum of total', async function () {
     it('Should show the sum of total for a given type of basket', async function () {
 
-        var alllBasket = ["Peach"];
+        var alllBasket = ["Banana", "Apple", "Orange", "Peach"];
+        console.log(alllBasket);
         var Apple = await basket.getFruitSum("Apple")
         var Banana = await basket.getFruitSum("Banana")
         var Orange = await basket.getFruitSum("Orange")
         assert.equal(3, Banana[0]["price"]);
+        console.log(Banana[0]["price"])
         assert.equal(3.50, Apple[0]["price"]);
         assert.equal(3.50, Orange[0]["price"]);
 
