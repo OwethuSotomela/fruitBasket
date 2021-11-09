@@ -2,7 +2,7 @@ const assert = require("assert");
 const tastyFruit = require("../fruitBasket");
 const { Pool } = require("pg");
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/fruitBasket';
+const connectionString = process.env.DATABASE_URL || 'postgresql://@localhost:5432/travis_ci_test';
 
 const pool = new Pool({
     connectionString: connectionString,
