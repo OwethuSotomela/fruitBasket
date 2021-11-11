@@ -1,9 +1,9 @@
 module.exports = function FruitBasket(pool) {
 
-    async function createFruitBasket(fruit) {
+    async function createFruitBasket(fruit, qty, price) {
         var fruitName = await pool.query("SELECT * FROM fruit_basket WHERE fruit_name = $1", [fruit])
         if (fruitName.rows.length == 0) {
-            await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price, original_price) VALUES ($1, $2, $3, $4)`, [fruit])
+            await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price, original_price) VALUES ($1, $2, $3, $4)`, [fruit, qty, price, price/qty])
         }
     }
 
@@ -20,6 +20,7 @@ module.exports = function FruitBasket(pool) {
     async function updateFruit(fruit) {
         var fruitName = await pool.query("SELECT * FROM fruit_basket")
         await pool.query("UPDATE fruit_basket SET quantity = quantity + 1, price = price + original_price WHERE fruit_name = $1", [fruit])
+        console.log(fruitName.rows)
         return fruitName.rows;
     }
 
@@ -40,6 +41,6 @@ module.exports = function FruitBasket(pool) {
         findFruit,
         updateFruit,
         showPrice,
-        getFruitSum,
+        getFruitSum
     }
 }

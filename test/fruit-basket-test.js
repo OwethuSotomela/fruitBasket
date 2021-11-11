@@ -28,6 +28,7 @@ describe("Create Fruit Basket", async function () {
             fruitBasket.push(element.fruit_name)
         });
 
+        console.log(fruitBasket)
         assert.equal(allBaskets.length, fruitBasket.length)
     })
 });
@@ -48,17 +49,18 @@ describe('Update fruit basket', async function () {
         var bananaBasket = ["Banana"];
         var fruitBasket = []
 
-        await basket.updateFruit("Banana");
+        await basket.updateFruit("Banana", 1, 3);
 
         var getFruitName = await basket.getFruit("")
 
         getFruitName.forEach(element => {
             fruitBasket.push(element.quantity)
         });
+        console.log(fruitBasket)
 
         assert.equal(bananaBasket.length, fruitBasket.length)
 
-    })
+    });
 });
 
 describe('Show Total Price', async function () {
