@@ -3,8 +3,7 @@ create table fruit_basket (
   id serial not null primary key,
   fruit_name varchar(255) not null, 
   quantity numeric not null, 
-  price decimal(10,2),
-  original_price decimal(10,2)
+  price decimal(10,2)
   );
 
-INSERT INTO fruit_basket (fruit_name, quantity, price, original_price) VALUES ('Banana', 1, 3, 3);
+INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ('Banana', 1, 3);

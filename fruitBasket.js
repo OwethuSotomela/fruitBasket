@@ -1,14 +1,11 @@
 module.exports = function FruitBasket(pool) {
 
     async function createFruitBasket(fruit, qty, price) {
-        var fruitName = await pool.query("SELECT * FROM fruit_basket WHERE fruit_name = $1", [fruit])
-        if (fruitName.rows.length == 0) {
-            await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price, original_price) VALUES ($1, $2, $3, $4)`, [fruit, qty, price, price/qty])
-        }
+            await pool.query(`INSERT INTO fruit_basket (fruit_name, quantity, price) VALUES ($1, $2, $3)`, [fruit, qty, price])
     }
 
     async function getFruit() {
-        var fruitName = await pool.query("SELECT * FROM fruit_basket")
+        var fruitName = await pool.query("SELECT fruit_name, quantity, price FROM fruit_basket")
         return fruitName.rows;
     }
 
@@ -17,21 +14,17 @@ module.exports = function FruitBasket(pool) {
         return fruitName.rows;
     }
 
-    async function updateFruit(fruit) {
-        var fruitName = await pool.query("SELECT * FROM fruit_basket")
-        await pool.query("UPDATE fruit_basket SET quantity = quantity + 1, price = price + original_price WHERE fruit_name = $1", [fruit])
-        console.log(fruitName.rows)
-        return fruitName.rows;
+    async function updateFruit(fruit, qty) {
+        await pool.query("UPDATE fruit_basket SET quantity = quantity + $2 WHERE fruit_name = $1", [fruit, qty])
     }
 
     async function showPrice(fruit) {
-        var fruitName = await pool.query("SELECT price FROM fruit_basket where fruit_name=$1", [fruit])
+        var fruitName = await pool.query("SELECT SUM(price * quantity) FROM fruit_basket WHERE fruit_name = $1", [fruit])
         return fruitName.rows;
     }
 
-    async function getFruitSum(fruit) {
-        var fruitName = await pool.query("SELECT SUM(price) FROM fruit_basket where fruit_name=$1", [fruit])
-        console.log(fruitName.rows)
+    async function getFruitSum() {
+        var fruitName = await pool.query("SELECT SUM(price) FROM fruit_basket")
         return fruitName.rows;
     }
 
