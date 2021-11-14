@@ -73,7 +73,7 @@ describe('Show Total Price', async function () {
 
         assert.deepEqual([
             {
-                sum: '6.00'
+                total_price: '6.00'
             }
         ], await basket.showPrice("Orange"));
     })
@@ -88,7 +88,7 @@ describe('Show sum of total', async function () {
         {
           sum: '12.00'
         }
-      ], await basket.getFruitSum())
+      ], await basket.getFruitSum("Pineapple"))
 
     })
 });
