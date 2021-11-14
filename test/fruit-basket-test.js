@@ -82,10 +82,7 @@ describe('Show Total Price', async function () {
 describe('Show sum of total', async function () {
     it('Should show the sum of total for a given type of basket', async function () {
 
-    await basket.createFruitBasket("Pineapple", 1, 3)
-    await basket.createFruitBasket("Pineapple", 1, 3)
-    await basket.createFruitBasket("Pineapple", 1, 3)
-    await basket.createFruitBasket("Pineapple", 1, 3)
+    await basket.createFruitBasket("Pineapple", 4, 3)
 
     assert.deepEqual([
         {

@@ -19,12 +19,12 @@ module.exports = function FruitBasket(pool) {
     }
 
     async function showPrice(fruit) {
-        var fruitName = await pool.query("SELECT SUM(price * quantity) FROM fruit_basket WHERE fruit_name = $1", [fruit])
+        var fruitName = await pool.query("SELECT (price * quantity) FROM fruit_basket WHERE fruit_name = $1", [fruit])
         return fruitName.rows;
     }
 
-    async function getFruitSum() {
-        var fruitName = await pool.query("SELECT SUM(price) FROM fruit_basket")
+    async function getFruitSum(fruit) {
+        var fruitName = await pool.query("SELECT SUM(price * quantity) FROM fruit_basket WHERE fruit_name = $1", [fruit])
         return fruitName.rows;
     }
 
