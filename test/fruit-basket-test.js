@@ -2,7 +2,7 @@ const assert = require("assert");
 const tastyFruit = require("../fruitBasket");
 const { Pool } = require("pg");
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/travis_ci_test';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/fruitBasket';
 
 const pool = new Pool({
     connectionString: connectionString,
@@ -82,11 +82,16 @@ describe('Show Total Price', async function () {
 describe('Show sum of total', async function () {
     it('Should show the sum of total for a given type of basket', async function () {
 
-    await basket.createFruitBasket("Pineapple", 4, 3)
+    await basket.createFruitBasket("Pineapple", 1, 3)
+    await basket.createFruitBasket("Pineapple", 1, 3)
+    await basket.createFruitBasket("Pineapple", 1, 3)
+    await basket.createFruitBasket("Pineapple", 1, 3)
+
+    console.log(await basket.getFruitSum("Pineapple"))
 
     assert.deepEqual([
         {
-          sum: '12.00'
+          sum: '4'
         }
       ], await basket.getFruitSum("Pineapple"))
 
