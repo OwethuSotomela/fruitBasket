@@ -83,15 +83,15 @@ describe('Show sum of total', async function () {
     it('Should show the sum of total for a given type of basket', async function () {
 
     await basket.createFruitBasket("Pineapple", 1, 3)
-    await basket.createFruitBasket("Pineapple", 1, 3)
-    await basket.createFruitBasket("Pineapple", 1, 3)
+    await basket.createFruitBasket("Pineapple", 2, 3)
+    await basket.createFruitBasket("Pineapple", 9, 3)
     await basket.createFruitBasket("Pineapple", 1, 3)
 
     console.log(await basket.getFruitSum("Pineapple"))
 
     assert.deepEqual([
         {
-          sum: '4'
+          sum: '13'
         }
       ], await basket.getFruitSum("Pineapple"))
 
